@@ -26,17 +26,20 @@ export class EmployeeListComponent implements OnInit{
 
   updateEmployee(id: number): void {
     console.log(`Update employee with ID: ${id}`);
-    // Logic to navigate to update page or open a form can be implemented here
+    this.router.navigate(['update-employee',id]); 
   }
 
   deleteEmployee(id: number): void {
     console.log(`Delete employee with ID: ${id}`);
     // Logic to delete the employee can be implemented here
-    this.employees = this.employees.filter(employee => employee.id !== id);
+    this.employeeService.deleteEmployee(id).subscribe(data=>{
+      console.log(data);
+      this.getEmployees();
+    })
   }
 
   employeeDetails(id: number): void {
     console.log(`View details of employee with ID: ${id}`);
-    
+    this.router.navigate(['employee-details', id]);
   }
 }
